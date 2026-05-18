@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { CartProvider } from "@/context/CartContext";
+import BackgroundGlow from "@/components/ui/BackgroundGlow";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"] });
@@ -16,13 +17,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased overflow-x-hidden pt-20`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased overflow-x-hidden`}>
         <CartProvider>
+          <BackgroundGlow />
           <Header />
-          {children}
+          <main className="min-h-screen">
+            {children}
+          </main>
           <Footer />
         </CartProvider>
       </body>
     </html>
   );
 }
+

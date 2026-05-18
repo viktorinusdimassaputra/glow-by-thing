@@ -1,104 +1,336 @@
+"use client";
+
 import Link from "next/link";
 import Reveal from "@/components/animations/Reveal";
-import Typewriter from "@/components/animations/Typewriter";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { ArrowRight } from "lucide-react";
+
+const routineSteps = [
+  {
+    id: "calming-micellar-water",
+    name: "Calming Micellar Water",
+    category: "Step 01 — Cleanse (Oil)",
+    image: "/glow_micellar_water.png",
+    tagline: "Pure skin starts here",
+    description: "An ultra-gentle, non-rinse micellar water infused with cucumber extract and organic rosewater. Effortlessly melts waterproof makeup, sunscreen, and daily pollutants while calming sensitive skin.",
+    keyActive: "Cucumber Extract & Rosewater"
+  },
+  {
+    id: "cloud-silk-cleanser",
+    name: "Cloud Silk Hydrating Wash",
+    category: "Step 02 — Cleanse (Water)",
+    image: "/glow_facial_wash.png",
+    tagline: "Deep wash, zero dryness",
+    description: "A silky, low-pH hydrating cleanser that transforms into a cloud-like micro-foam. Formulated with oat amino acids and ceramides to deeply cleanse without stripping moisture.",
+    keyActive: "Oat Amino Acids & Ceramides"
+  },
+  {
+    id: "hydrating-milk-toner",
+    name: "Hydrating Milk Toner",
+    category: "Step 03 — Tone & Prep",
+    image: "/glow_hydrating_toner.png",
+    tagline: "Instant hydration flood",
+    description: "A skin-cushioning milky toner that floods dehydrated skin with instant moisture. Infused with beta-glucan and triple hyaluronic acid to refine skin texture and optimize active absorption.",
+    keyActive: "Beta-Glucan & Panthenol"
+  },
+  {
+    id: "luminous-c-essence",
+    name: "Luminous C 15% Essence",
+    category: "Step 04 — Treat & Brighten",
+    image: "/glow_coll_serum.png",
+    tagline: "Fades spots, ignites glow",
+    description: "A potent 15% L-Ascorbic Acid serum stabilized with Ferulic Acid and Vitamin E. Rapidly fades stubborn hyperpigmentation, brightens skin tone, and provides robust daily environmental defense.",
+    keyActive: "15% Vitamin C & Ferulic Acid"
+  },
+  {
+    id: "dewy-glow-barrier-cream",
+    name: "Dewy Glow Barrier Cream",
+    category: "Step 05 — Hydrate & Seal",
+    image: "/glow_coll_cream.png",
+    tagline: "48-Hour lock-in moisture",
+    description: "Our signature whipped cream moisturizer that locks in hydration for 48 hours without feeling heavy. Formulated with squalane, niacinamide, and triple ceramides to restore skin barriers.",
+    keyActive: "Squalane & Niacinamide & Ceramides"
+  },
+  {
+    id: "glow-shield-spf",
+    name: "Glow Shield SPF 50 PA++++",
+    category: "Step 6 — Protect & Prime",
+    image: "/glow_sunscreen.png",
+    tagline: "Invisible shield, glowing primer",
+    description: "An invisible, weightless hybrid sunscreen that leaves zero white cast. Acts as a glowing, grip-primer under makeup while providing maximum UV protection against aging rays.",
+    keyActive: "Broad Spectrum Filters & Hyaluronic Acid"
+  }
+];
+
+const productCluster = [
+  {
+    id: "calming-micellar-water",
+    name: "Calming Micellar Water",
+    image: "/glow_micellar_water.png",
+    position: "left-[5%] md:left-[8%] top-[10%] md:top-[8%]",
+    rotate: -10,
+    size: "w-32 sm:w-44 md:w-56 lg:w-64",
+    delay: 0.1
+  },
+  {
+    id: "cloud-silk-cleanser",
+    name: "Cloud Silk Hydrating Wash",
+    image: "/glow_facial_wash.png",
+    position: "right-[5%] md:right-[8%] top-[12%] md:top-[10%]",
+    rotate: 8,
+    size: "w-28 sm:w-40 md:w-48 lg:w-56",
+    delay: 0.2
+  },
+  {
+    id: "hydrating-milk-toner",
+    name: "Hydrating Milk Toner",
+    image: "/glow_hydrating_toner.png",
+    position: "left-[12%] md:left-[15%] bottom-[5%] md:bottom-[2%]",
+    rotate: -5,
+    size: "w-32 sm:w-44 md:w-52 lg:w-60",
+    delay: 0.3
+  },
+  {
+    id: "luminous-c-essence",
+    name: "Luminous C 15% Essence",
+    image: "/glow_coll_serum.png",
+    position: "right-[10%] md:right-[14%] bottom-[8%] md:bottom-[5%]",
+    rotate: 6,
+    size: "w-28 sm:w-40 md:w-48 lg:w-56",
+    delay: 0.4
+  },
+  {
+    id: "dewy-glow-barrier-cream",
+    name: "Dewy Glow Barrier Cream",
+    image: "/glow_coll_cream.png",
+    position: "left-[-2%] md:left-[1%] top-[45%] md:top-[38%]",
+    rotate: -12,
+    size: "w-32 sm:w-44 md:w-52 lg:w-60",
+    delay: 0.5
+  },
+  {
+    id: "glow-shield-spf",
+    name: "Glow Shield SPF 50 PA++++",
+    image: "/glow_sunscreen.png",
+    position: "right-[-2%] md:right-[1%] top-[48%] md:top-[42%]",
+    rotate: 12,
+    size: "w-28 sm:w-36 md:w-44 lg:w-52",
+    delay: 0.6
+  }
+];
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-alabaster">
-      {/* Editorial Hero */}
-      <section className="relative h-screen min-h-[800px] flex items-center justify-center text-center overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&q=80&w=1920"
-            alt="Editorial Skincare"
-            className="w-full h-full object-cover grayscale-[30%] opacity-80"
-          />
-        </div>
+    <main className="relative bg-transparent">
+      {/* Radiant Hero Section - Organic Product Cluster Overlap Layout */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#faf0ed] py-24 md:py-32">
+        {/* Subtle decorative background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#faf0ed] via-white to-[#fae6e0] opacity-70 pointer-events-none"></div>
         
-        <div className="absolute inset-0 bg-gradient-to-t from-alabaster via-transparent to-transparent"></div>
-        
-        <div className="relative z-10 px-6 max-w-4xl mx-auto mt-20">
-          <Reveal>
-            <h1 className="text-6xl md:text-8xl font-serif text-obsidian leading-[1.1] uppercase tracking-tighter">
-              <Typewriter text="The Art of " speed={120} />
-              <br/> 
-              <Typewriter text="skin" speed={150} delay={1.5} className="lowercase font-light" />
-            </h1>
-          </Reveal>
-          
-          <Reveal delay={0.2}>
-            <p className="text-lg md:text-xl text-slate mt-8 max-w-lg mx-auto font-light tracking-wide">
-              Meticulously formulated. Clinically proven. Designed for the modern ritual.
-            </p>
-          </Reveal>
-          
-          <Reveal delay={0.4}>
-            <div className="mt-12">
-              <Link
-                href="/shop"
-                className="inline-block px-10 py-4 bg-obsidian text-alabaster uppercase tracking-widest text-sm hover:bg-slate transition-colors"
+        {/* Ambient warm glow in the center */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-glow-peach/30 rounded-full blur-3xl pointer-events-none z-0"></div>
+
+        {/* 1. Clustered Organic Product Backdrop (Berkumpul, Agak Burem, Image Gede) */}
+        <div className="absolute inset-0 z-10 w-full h-full pointer-events-auto select-none overflow-hidden">
+          {productCluster.map((item, idx) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, scale: 0.85, rotate: item.rotate }}
+              animate={{ opacity: 1, scale: 1, rotate: item.rotate }}
+              transition={{ 
+                type: "spring",
+                stiffness: 45,
+                damping: 15,
+                delay: item.delay 
+              }}
+              whileHover={{ 
+                scale: 1.05, 
+                zIndex: 30,
+                transition: { duration: 0.4 }
+              }}
+              className={`absolute ${item.position} ${item.size} aspect-[3/4] flex flex-col items-center justify-center cursor-pointer pointer-events-auto group`}
+            >
+              {/* Overlay Link to Product Shop Details */}
+              <Link href={`/shop/${item.id}`} className="absolute inset-0 z-20" />
+
+              {/* Floating Breathing Animation */}
+              <motion.div
+                animate={{
+                  y: [0, idx % 2 === 0 ? 8 : -8, 0]
+                }}
+                transition={{
+                  duration: 6 + idx,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="w-full h-full flex flex-col items-center justify-center relative"
               >
-                Discover Collection
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+                {/* Large Product Bottle Image (Agak Burem / Slightly Blurred by default, clear on hover) */}
+                <div className="w-full h-full flex items-center justify-center transition-all duration-[800ms] filter blur-[3.5px] opacity-[0.22] group-hover:blur-0 group-hover:opacity-100">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="max-h-full max-w-full object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.06)]"
+                  />
+                </div>
 
-      {/* Minimalism Features */}
-      <section className="py-32 bg-alabaster">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <Reveal className="mb-24 flex flex-col md:flex-row justify-between items-end border-b hairline pb-8">
-            <h2 className="text-4xl font-serif text-obsidian">Philosophy</h2>
-            <p className="text-slate uppercase tracking-widest text-xs mt-4 md:mt-0">Less, but better.</p>
-          </Reveal>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-            <Reveal delay={0.1}>
-              <span className="text-xs uppercase tracking-widest text-slate mb-4 block">01</span>
-              <h3 className="text-xl font-serif mb-4 text-obsidian">Pure Efficacy</h3>
-              <p className="font-light text-slate text-sm leading-loose">We strip away the unnecessary, leaving only potent, clinically-proven actives that deliver visible results.</p>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <span className="text-xs uppercase tracking-widest text-slate mb-4 block">02</span>
-              <h3 className="text-xl font-serif mb-4 text-obsidian">Internal Balance</h3>
-              <p className="font-light text-slate text-sm leading-loose">Topical care is half the equation. Our nutritional guides target skin health internally for a permanent glow.</p>
-            </Reveal>
-            <Reveal delay={0.3}>
-              <span className="text-xs uppercase tracking-widest text-slate mb-4 block">03</span>
-              <h3 className="text-xl font-serif mb-4 text-obsidian">Conscious Luxury</h3>
-              <p className="font-light text-slate text-sm leading-loose">Sustainability shouldn't compromise elegance. All packaging is post-consumer recycled and fully refillable.</p>
-            </Reveal>
-          </div>
+                {/* Floating tooltip/label on hover */}
+                <div className="absolute -bottom-2 bg-obsidian/90 backdrop-blur-sm text-alabaster text-[9px] uppercase tracking-widest px-3.5 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-md z-30 font-bold">
+                  {item.name.split(' ').slice(1).join(' ') || item.name}
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
         </div>
-      </section>
 
-      {/* Asymmetrical Editorial Grid */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            
-            <Reveal className="md:col-span-5 md:col-start-2">
-              <div className="aspect-[3/4] overflow-hidden bg-alabaster">
-                <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover" alt="Lab" />
+        {/* 2. Centered Luxury Typography Overlay (Menimpah Produk - Card Removed) */}
+        <div className="relative z-20 container mx-auto px-6 max-w-3xl flex flex-col items-center text-center pointer-events-none">
+          <div className="pointer-events-auto space-y-8 text-center flex flex-col items-center max-w-xl md:max-w-2xl">
+            <Reveal delay={0.0}>
+              <div className="flex justify-center">
+                <span className="text-[9px] uppercase tracking-[0.4em] text-slate font-bold bg-white/70 backdrop-blur-sm px-5 py-2.5 rounded-full inline-block border border-black/5 shadow-sm">
+                  Innovation in Dermatology
+                </span>
               </div>
             </Reveal>
             
-            <Reveal delay={0.2} className="md:col-span-4 md:pl-12">
-              <span className="text-xs tracking-widest uppercase text-slate mb-6 block">Intelligence</span>
-              <h2 className="text-4xl font-serif text-obsidian mb-6 leading-tight">The Skin Laboratory</h2>
-              <p className="text-slate font-light leading-relaxed mb-8">
-                Demystify your routine. Access our ingredient database to understand how to layer actives safely without damaging your barrier.
-              </p>
-              <Link href="/skinlab" className="border-b hairline pb-1 text-obsidian uppercase tracking-widest text-xs hover:text-slate transition-colors">
-                Enter The Lab
-              </Link>
+            <Reveal delay={0.1}>
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-obsidian leading-[1.05] uppercase tracking-tighter text-balance drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]">
+                Luminous <br />
+                <span className="italic font-light opacity-85">Essence</span>
+              </h1>
             </Reveal>
+            
+            <Reveal delay={0.2}>
+              <div className="flex justify-center">
+                <p className="text-xs md:text-sm text-slate max-w-sm md:max-w-md font-light leading-relaxed tracking-wide drop-shadow-[0_1px_5px_rgba(255,255,255,0.6)]">
+                  Bespoke skincare solutions designed to synchronize with your skin's biology. Pure. Potent. Permanent.
+                </p>
+              </div>
+            </Reveal>
+            
+            <Reveal delay={0.3}>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full">
+                <Link
+                  href="/shop"
+                  className="w-full sm:w-auto group relative px-10 py-4 bg-obsidian text-alabaster overflow-hidden rounded-full transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.35)] text-center"
+                >
+                  <span className="relative z-10 text-[10px] uppercase tracking-[0.2em] font-bold">Discover Routine</span>
+                  <motion.div 
+                    className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500"
+                  />
+                </Link>
+                <Link
+                  href="/skinlab"
+                  className="w-full sm:w-auto group flex items-center justify-center space-x-3 text-[10px] uppercase tracking-[0.2em] font-bold text-obsidian hover:opacity-60 transition py-4 px-4"
+                >
+                  <span>The Skin Lab</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+        </div>
 
+        {/* Scroll Indicator */}
+        <div className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center space-y-2 opacity-20">
+          <span className="text-[8px] uppercase tracking-widest font-medium">Scroll to explore</span>
+          <div className="w-[1px] h-8 bg-obsidian origin-top animate-pulse" />
+        </div>
+      </section>
+
+      {/* Philosophy Section - Staggered & Clean */}
+      <section className="py-40 bg-white/50 backdrop-blur-3xl border-y border-white/20">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+            {/* Single Clean Skincare Package Set (1 Gambar Tunggal Paket Skincare) */}
+            <Reveal>
+              <div className="relative aspect-square w-full overflow-hidden rounded-3xl shadow-xl border border-white/60 bg-white group cursor-pointer">
+                {/* Global Click Link to shop the set */}
+                <Link href="/shop" className="absolute inset-0 z-20" />
+                <img 
+                  src="/paket-skincare-master.png" 
+                  className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 ease-out" 
+                  alt="Glow by Thing Complete Skincare Set" 
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.02] transition-colors duration-500 rounded-3xl"></div>
+                <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-3xl"></div>
+              </div>
+            </Reveal>
+            
+            <div className="space-y-16">
+              <Reveal>
+                <div className="inline-block px-4 py-1.5 rounded-full bg-glow-peach text-[10px] uppercase font-bold tracking-widest text-obsidian/70">
+                  Our Philosophy
+                </div>
+                <h2 className="text-5xl font-serif text-obsidian mt-6 leading-tight">Beyond the <br/><span className="italic">surface.</span></h2>
+              </Reveal>
+
+              <div className="grid gap-12">
+                {[
+                  { title: "Cellular Intelligence", desc: "Formulated with bio-compatible molecules that penetrate the dermis for lasting repair." },
+                  { title: "Ethical Luxury", desc: "100% vegan, cruelty-free, and housed in hand-blown glass intended for reuse." },
+                ].map((item, idx) => (
+                  <Reveal key={idx} delay={0.2 + idx * 0.1}>
+                    <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-obsidian mb-4 flex items-center">
+                      <span className="w-8 h-[1px] bg-obsidian/20 mr-4"></span>
+                      {item.title}
+                    </h3>
+                    <p className="text-slate font-light leading-relaxed pl-12 text-sm italic">
+                      "{item.desc}"
+                    </p>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* The Glow Section - High Impact */}
+      <section className="py-40">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <Reveal className="text-center mb-24">
+            <div className="relative">
+              <h2 className="text-6xl md:text-8xl font-serif text-obsidian/5 uppercase tracking-tighter absolute left-1/2 -translate-x-1/2 -top-12 z-0 whitespace-nowrap select-none">
+                Radiance Reimagined
+              </h2>
+              <h3 className="relative z-10 text-4xl font-serif text-obsidian">Curated Collections</h3>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {routineSteps.map((item, idx) => (
+              <Reveal key={item.id} delay={(idx + 1) * 0.1} yOffset={50}>
+                <Link href={`/shop/${item.id}`} className="group block relative aspect-square overflow-hidden rounded-xl bg-gray-50 shadow-md transition-shadow hover:shadow-xl duration-500">
+                  <img 
+                    src={item.image}
+                    className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
+                    alt={item.name}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-65 group-hover:opacity-80 transition-opacity duration-500"></div>
+                  
+                  {/* Step Badge */}
+                  <span className="absolute top-6 left-6 z-10 text-[10px] font-bold uppercase tracking-[0.2em] bg-white/95 backdrop-blur-sm text-obsidian px-3.5 py-1.5 rounded-full shadow-sm">
+                    {item.category.split(' — ')[0]}
+                  </span>
+
+                  <div className="absolute bottom-0 left-0 right-0 p-8 z-10 transition-transform duration-500">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-glow-peach mb-2">
+                      {item.category.split(' — ')[1]?.split(' (')[0] || "Treat"}
+                    </p>
+                    <h4 className="text-2xl font-serif text-white group-hover:text-glow-peach transition-colors duration-300">{item.name}</h4>
+                    <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-white/60 mt-4 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300">
+                      Shop Product <ArrowRight className="w-3 h-3 ml-2" />
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

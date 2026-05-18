@@ -1,32 +1,42 @@
 @import "tailwindcss";
 
 @theme {
-  --color-alabaster: #FBFBF9;
-  --color-obsidian: #121212;
-  --color-cashmere: #D5CBBF;
-  --color-slate: #525252;
+  --color-alabaster: #FFFFFF;
+  --color-pearl: #FDFDFD;
+  --color-obsidian: #0A0A0A;
+  --color-cashmere: #E5DCD3;
+  --color-slate: #717171;
   
-  --font-sans: 'Inter', sans-serif;
+  /* Glow Accents */
+  --color-glow-peach: #FFF0EB;
+  --color-glow-gold: #FFF9E6;
+  --color-glow-indigo: #EEF2FF;
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
   --font-serif: 'Playfair Display', serif;
   
-  --animate-spin-slow: spin 15s linear infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-image-pan: imagePan 30s ease-in-out infinite alternate;
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-glow: glow 10s ease-in-out infinite alternate;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(1deg); }
 }
-@keyframes imagePan {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.15); }
+
+@keyframes glow {
+  0% { transform: scale(1) translate(0px, 0px); opacity: 0.3; }
+  50% { transform: scale(1.2) translate(20px, -20px); opacity: 0.5; }
+  100% { transform: scale(0.9) translate(-10px, 10px); opacity: 0.3; }
 }
 
 @layer base {
   html, body {
     background-color: var(--color-alabaster);
     color: var(--color-obsidian);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
   }
   
   ::selection {
@@ -35,20 +45,34 @@
   }
   
   /* Custom High-End Scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--color-alabaster); }
-  ::-webkit-scrollbar-thumb { background: var(--color-cashmere); border-radius: 10px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--color-slate); }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; transition: background 0.3s; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
 }
 
 @layer utilities {
   .glass {
-    background: rgba(251, 251, 249, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .hairline {
-    border-color: rgba(0, 0, 0, 0.08);
+  
+  .glow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, #FFFAF8 0%, #FFFFFF 100%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
   }
 }
+
