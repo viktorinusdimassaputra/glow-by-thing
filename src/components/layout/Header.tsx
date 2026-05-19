@@ -39,22 +39,26 @@ export default function Header() {
       >
         <div className="container mx-auto px-6 grid grid-cols-3 items-center">
           {/* Left: Nav Links */}
-          <nav className="hidden md:flex space-x-8 text-[11px] uppercase tracking-[0.2em] font-medium">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                className={`group relative transition-colors hover:text-white ${
-                  pathname.startsWith(link.path) ? "text-white" : "text-white/70"
-                }`}
-              >
-                {link.name}
-                <motion.span 
-                  className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"
-                  animate={{ width: pathname.startsWith(link.path) ? "100%" : "0%" }}
-                />
-              </Link>
-            ))}
+          <nav className="hidden md:flex space-x-10 text-xs uppercase tracking-[0.2em] font-medium items-center">
+            {navLinks.map((link) => {
+              const isActive = pathname.startsWith(link.path);
+              return (
+                <Link
+                  key={link.name}
+                  href={link.path}
+                  className={`group relative py-2 transition-colors duration-300 ${
+                    isActive ? "text-white" : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  {link.name}
+                  <span 
+                    className={`absolute bottom-0 left-0 h-[1px] bg-[var(--color-gold)] transition-all duration-300 ease-out ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -111,29 +115,49 @@ export default function Header() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "-100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-white/5 z-50 md:hidden flex flex-col p-8"
+            className="fixed inset-0 bg-black z-[100] md:hidden flex flex-col px-8 pt-10 pb-12 overflow-y-auto"
           >
-            <div className="flex justify-between items-center mb-12">
-              <span className="font-serif tracking-widest text-sm text-white/70">MENU</span>
-              <button onClick={() => setIsMobileMenuOpen(false)}>
-                <X className="w-6 h-6" />
+            {/* Header of Mobile Menu */}
+            <div className="flex justify-between items-center mb-16">
+              <span className="font-serif tracking-widest text-sm text-white/70">
+                MENU
+              </span>
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+                aria-label="Close menu"
+              >
+                <X className="w-8 h-8" />
               </button>
             </div>
             
-            <nav className="flex flex-col space-y-8">
+            {/* Menu Links */}
+            <nav className="flex flex-col items-center justify-center flex-1 space-y-10">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-3xl font-serif transition-colors hover:translate-x-2 duration-300 ${
-                    pathname.startsWith(link.path) ? "text-white" : "text-white/70"
+                  className={`text-4xl font-serif transition-all hover:scale-105 duration-300 relative group ${
+                    pathname.startsWith(link.path) ? "text-white" : "text-white/70 hover:text-white"
                   }`}
                 >
                   {link.name}
+                  <span 
+                    className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-[2px] bg-[var(--color-gold)] transition-all duration-300 ${
+                      pathname.startsWith(link.path) ? "w-1/2" : "w-0 group-hover:w-1/2"
+                    }`}
+                  />
                 </Link>
               ))}
             </nav>
+            
+            {/* Footer of Mobile Menu */}
+            <div className="mt-auto pt-10 text-center">
+              <span className="text-xs font-serif tracking-[0.25em] text-white/50 uppercase">
+                Glow <span className="italic font-light">by</span> Thing
+              </span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
