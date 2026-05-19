@@ -51,7 +51,7 @@ export default function Header() {
                 {link.name}
                 <motion.span 
                   className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"
-                  animate={{ w: pathname.startsWith(link.path) ? "100%" : "0%" }}
+                  animate={{ width: pathname.startsWith(link.path) ? "100%" : "0%" }}
                 />
               </Link>
             ))}
