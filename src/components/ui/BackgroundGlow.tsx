@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function BackgroundGlow() {
   return (
     <div className="glow-container">
-      {/* Soft Peach Glow */}
+      {/* Warm Gold Glow */}
       <motion.div
         animate={{
           x: [0, 40, -20, 0],
@@ -17,8 +17,8 @@ export default function BackgroundGlow() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full opacity-[0.15] blur-[120px]"
-        style={{ background: "radial-gradient(circle, var(--color-glow-peach) 0%, transparent 70%)" }}
+        className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full opacity-[0.18] blur-[120px]"
+        style={{ background: "radial-gradient(circle, var(--color-glow-coral) 0%, transparent 70%)" }}
       />
 
       {/* Pale Gold Glow */}

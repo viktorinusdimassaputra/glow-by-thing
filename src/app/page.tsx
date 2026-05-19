@@ -122,14 +122,14 @@ const productCluster = [
 
 export default function Home() {
   return (
-    <main className="relative bg-transparent">
+    <main className="relative bg-black">
       {/* Radiant Hero Section - Organic Product Cluster Overlap Layout */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#faf0ed] py-24 md:py-32">
-        {/* Subtle decorative background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#faf0ed] via-white to-[#fae6e0] opacity-70 pointer-events-none"></div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 md:py-32">
+        {/* Subtle decorative dark vignette */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-black/10 pointer-events-none"></div>
         
-        {/* Ambient warm glow in the center */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-glow-peach/30 rounded-full blur-3xl pointer-events-none z-0"></div>
+        {/* Ambient glow in the center */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 rounded-full blur-3xl pointer-events-none z-0" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 60%)' }}></div>
 
         {/* 1. Clustered Organic Product Backdrop (Berkumpul, Agak Burem, Image Gede) */}
         <div className="absolute inset-0 z-10 w-full h-full pointer-events-auto select-none overflow-hidden">
@@ -176,7 +176,7 @@ export default function Home() {
                 </div>
 
                 {/* Floating tooltip/label on hover */}
-                <div className="absolute -bottom-2 bg-obsidian/90 backdrop-blur-sm text-alabaster text-[9px] uppercase tracking-widest px-3.5 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-md z-30 font-bold">
+                <div className="absolute -bottom-2 bg-black/60 backdrop-blur-sm text-white text-[9px] uppercase tracking-widest px-3.5 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-md z-30 font-bold">
                   {item.name.split(' ').slice(1).join(' ') || item.name}
                 </div>
               </motion.div>
@@ -186,17 +186,17 @@ export default function Home() {
 
         {/* 2. Centered Luxury Typography Overlay (Menimpah Produk - Card Removed) */}
         <div className="relative z-20 container mx-auto px-6 max-w-3xl flex flex-col items-center text-center pointer-events-none">
-          <div className="pointer-events-auto space-y-8 text-center flex flex-col items-center max-w-xl md:max-w-2xl">
+            <div className="pointer-events-auto space-y-8 text-center flex flex-col items-center max-w-xl md:max-w-2xl">
             <Reveal delay={0.0}>
               <div className="flex justify-center">
-                <span className="text-[9px] uppercase tracking-[0.4em] text-slate font-bold bg-white/70 backdrop-blur-sm px-5 py-2.5 rounded-full inline-block border border-black/5 shadow-sm">
+                <span className="text-[9px] uppercase tracking-[0.4em] text-white font-bold bg-white/5 backdrop-blur-sm px-5 py-2.5 rounded-full inline-block border border-white/10 shadow-sm">
                   Innovation in Dermatology
                 </span>
               </div>
             </Reveal>
             
             <Reveal delay={0.1}>
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-obsidian leading-[1.05] uppercase tracking-tighter text-balance drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]">
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-white leading-[1.05] uppercase tracking-tighter text-balance drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
                 Luminous <br />
                 <span className="italic font-light opacity-85">Essence</span>
               </h1>
@@ -204,26 +204,26 @@ export default function Home() {
             
             <Reveal delay={0.2}>
               <div className="flex justify-center">
-                <p className="text-xs md:text-sm text-slate max-w-sm md:max-w-md font-light leading-relaxed tracking-wide drop-shadow-[0_1px_5px_rgba(255,255,255,0.6)]">
+                <p className="text-xs md:text-sm text-white/70 max-w-sm md:max-w-md font-light leading-relaxed tracking-wide">
                   Bespoke skincare solutions designed to synchronize with your skin's biology. Pure. Potent. Permanent.
                 </p>
               </div>
             </Reveal>
             
             <Reveal delay={0.3}>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full">
                 <Link
                   href="/shop"
-                  className="w-full sm:w-auto group relative px-10 py-4 bg-obsidian text-alabaster overflow-hidden rounded-full transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.35)] text-center"
+                  className="w-full sm:w-auto group relative px-10 py-4 overflow-hidden rounded-full transition-all duration-500 text-center bg-[var(--color-gold)] text-black"
                 >
                   <span className="relative z-10 text-[10px] uppercase tracking-[0.2em] font-bold">Discover Routine</span>
                   <motion.div 
-                    className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500"
+                    className="absolute inset-0 bg-black/0 translate-y-full group-hover:translate-y-0 transition-transform duration-500"
                   />
                 </Link>
                 <Link
                   href="/skinlab"
-                  className="w-full sm:w-auto group flex items-center justify-center space-x-3 text-[10px] uppercase tracking-[0.2em] font-bold text-obsidian hover:opacity-60 transition py-4 px-4"
+                  className="w-full sm:w-auto group flex items-center justify-center space-x-3 text-[10px] uppercase tracking-[0.2em] font-bold text-white hover:opacity-60 transition py-4 px-4"
                 >
                   <span>The Skin Lab</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -234,19 +234,19 @@ export default function Home() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center space-y-2 opacity-20">
-          <span className="text-[8px] uppercase tracking-widest font-medium">Scroll to explore</span>
-          <div className="w-[1px] h-8 bg-obsidian origin-top animate-pulse" />
+        <div className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center space-y-2 opacity-30">
+          <span className="text-[8px] uppercase tracking-widest font-medium text-white/60">Scroll to explore</span>
+          <div className="w-[1px] h-8 bg-white/20 origin-top animate-pulse" />
         </div>
       </section>
 
       {/* Philosophy Section - Staggered & Clean */}
-      <section className="py-40 bg-white/50 backdrop-blur-3xl border-y border-white/20">
+      <section className="py-40 bg-[var(--color-cream)] text-black border-y border-black/10">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
             {/* Single Clean Skincare Package Set (1 Gambar Tunggal Paket Skincare) */}
             <Reveal>
-              <div className="relative aspect-square w-full overflow-hidden rounded-3xl shadow-xl border border-white/60 bg-white group cursor-pointer">
+                <div className="relative aspect-square w-full overflow-hidden rounded-3xl shadow-xl border border-black/10 bg-black/5 group cursor-pointer">
                 {/* Global Click Link to shop the set */}
                 <Link href="/shop" className="absolute inset-0 z-20" />
                 <img 
@@ -261,10 +261,10 @@ export default function Home() {
             
             <div className="space-y-16">
               <Reveal>
-                <div className="inline-block px-4 py-1.5 rounded-full bg-glow-peach text-[10px] uppercase font-bold tracking-widest text-obsidian/70">
+                <div className="inline-block px-4 py-1.5 rounded-full text-[10px] uppercase font-bold tracking-widest text-black bg-[var(--color-gold-light)]">
                   Our Philosophy
                 </div>
-                <h2 className="text-5xl font-serif text-obsidian mt-6 leading-tight">Beyond the <br/><span className="italic">surface.</span></h2>
+                <h2 className="text-5xl font-serif text-black mt-6 leading-tight">Beyond the <br/><span className="italic">surface.</span></h2>
               </Reveal>
 
               <div className="grid gap-12">
@@ -273,11 +273,11 @@ export default function Home() {
                   { title: "Ethical Luxury", desc: "100% vegan, cruelty-free, and housed in hand-blown glass intended for reuse." },
                 ].map((item, idx) => (
                   <Reveal key={idx} delay={0.2 + idx * 0.1}>
-                    <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-obsidian mb-4 flex items-center">
-                      <span className="w-8 h-[1px] bg-obsidian/20 mr-4"></span>
+                    <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-black mb-4 flex items-center">
+                      <span className="w-8 h-[1px] bg-black/20 mr-4"></span>
                       {item.title}
                     </h3>
-                    <p className="text-slate font-light leading-relaxed pl-12 text-sm italic">
+                    <p className="text-black/70 font-light leading-relaxed pl-12 text-sm italic">
                       "{item.desc}"
                     </p>
                   </Reveal>
@@ -289,14 +289,14 @@ export default function Home() {
       </section>
 
       {/* The Glow Section - High Impact */}
-      <section className="py-40">
+      <section className="py-40 bg-[var(--color-brown)]">
         <div className="container mx-auto px-6 max-w-7xl">
           <Reveal className="text-center mb-24">
             <div className="relative">
-              <h2 className="text-6xl md:text-8xl font-serif text-obsidian/5 uppercase tracking-tighter absolute left-1/2 -translate-x-1/2 -top-12 z-0 whitespace-nowrap select-none">
+              <h2 className="text-6xl md:text-8xl font-serif text-white/5 uppercase tracking-tighter absolute left-1/2 -translate-x-1/2 -top-12 z-0 whitespace-nowrap select-none">
                 Radiance Reimagined
               </h2>
-              <h3 className="relative z-10 text-4xl font-serif text-obsidian">Curated Collections</h3>
+              <h3 className="relative z-10 text-4xl font-serif text-white">Curated Collections</h3>
             </div>
           </Reveal>
 
@@ -312,15 +312,15 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-65 group-hover:opacity-80 transition-opacity duration-500"></div>
                   
                   {/* Step Badge */}
-                  <span className="absolute top-6 left-6 z-10 text-[10px] font-bold uppercase tracking-[0.2em] bg-white/95 backdrop-blur-sm text-obsidian px-3.5 py-1.5 rounded-full shadow-sm">
+                  <span className="absolute top-6 left-6 z-10 text-[10px] font-bold uppercase tracking-[0.2em] bg-white/5 backdrop-blur-sm text-white px-3.5 py-1.5 rounded-full shadow-sm">
                     {item.category.split(' — ')[0]}
                   </span>
 
                   <div className="absolute bottom-0 left-0 right-0 p-8 z-10 transition-transform duration-500">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-glow-peach mb-2">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.25em] mb-2 text-[var(--color-gold)]">
                       {item.category.split(' — ')[1]?.split(' (')[0] || "Treat"}
                     </p>
-                    <h4 className="text-2xl font-serif text-white group-hover:text-glow-peach transition-colors duration-300">{item.name}</h4>
+                    <h4 className="text-2xl font-serif text-white transition-colors duration-300">{item.name}</h4>
                     <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-white/60 mt-4 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300">
                       Shop Product <ArrowRight className="w-3 h-3 ml-2" />
                     </span>

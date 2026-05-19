@@ -27,7 +27,7 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full max-w-md bg-alabaster shadow-2xl z-50 flex flex-col border-l hairline"
+            className="fixed top-0 right-0 h-full w-full max-w-md bg-white/5 shadow-2xl z-50 flex flex-col border-l hairline"
           >
             {/* Header */}
             <div className="flex justify-between items-center p-6 border-b hairline">
@@ -43,7 +43,7 @@ export default function CartDrawer() {
             {/* Items */}
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               {cart.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-slate">
+                <div className="h-full flex flex-col items-center justify-center text-white/70">
                   <ShoppingBag className="w-12 h-12 mb-4 opacity-20" />
                   <p>Your bag is mysteriously empty.</p>
                 </div>
@@ -53,12 +53,12 @@ export default function CartDrawer() {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-24 h-24 object-cover bg-white"
+                      className="w-24 h-24 object-cover bg-white/5"
                     />
                     <div className="flex-1 flex flex-col justify-between py-1">
                       <div>
-                        <h4 className="font-medium text-obsidian line-clamp-1">{item.name}</h4>
-                        <p className="text-slate text-sm">Rp {item.price.toLocaleString("id-ID")}</p>
+                        <h4 className="font-medium text-white line-clamp-1">{item.name}</h4>
+                        <p className="text-white/70 text-sm">Rp {item.price.toLocaleString("id-ID")}</p>
                       </div>
                       
                       <div className="flex justify-between items-end">
@@ -79,7 +79,7 @@ export default function CartDrawer() {
                         </div>
                         <button
                           onClick={() => removeFromCart(item.id)}
-                          className="text-xs text-slate underline hover:text-obsidian"
+                          className="text-xs text-white/70 underline hover:text-white"
                         >
                           Remove
                         </button>
@@ -92,16 +92,17 @@ export default function CartDrawer() {
 
             {/* Footer */}
             {cart.length > 0 && (
-              <div className="p-6 border-t hairline bg-white">
+              <div className="p-6 border-t hairline bg-white/5">
                 <div className="flex justify-between mb-4">
                   <span className="font-medium">Subtotal</span>
                   <span className="font-medium">Rp {cartTotal.toLocaleString("id-ID")}</span>
                 </div>
-                <p className="text-xs text-slate mb-6">Shipping & taxes calculated at checkout.</p>
+                <p className="text-xs text-white/70 mb-6">Shipping & taxes calculated at checkout.</p>
                 <Link
                   href="/checkout"
                   onClick={() => setIsCartOpen(false)}
-                  className="block w-full bg-obsidian text-alabaster text-center py-4 font-medium hover:bg-black transition-colors uppercase tracking-widest text-sm"
+                  className="block w-full text-center py-4 font-medium uppercase tracking-widest text-sm"
+                  style={{ background: 'var(--color-accent-coral)', color: '#0b1220' }}
                 >
                   Proceed to Checkout
                 </Link>
