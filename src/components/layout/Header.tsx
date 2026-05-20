@@ -30,6 +30,7 @@ export default function Header() {
 
   return (
     <>
+
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -75,7 +76,7 @@ export default function Header() {
             href="/" 
             className="flex items-center justify-center space-x-3 hover:opacity-80 transition-all duration-500 justify-self-center"
           >
-            <span className="hidden sm:inline-block text-xs md:text-sm font-serif tracking-[0.25em] text-white uppercase">
+            <span className="inline-block text-[10px] sm:text-xs md:text-sm font-serif tracking-[0.25em] text-white uppercase whitespace-nowrap">
               Glow <span className="font-light italic opacity-60">by</span> Thing
             </span>
           </Link>
@@ -115,30 +116,29 @@ export default function Header() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "-100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-black z-[100] md:hidden flex flex-col px-8 pt-10 pb-12 overflow-y-auto"
+            className="fixed inset-0 bg-black z-[100] md:hidden flex flex-col items-center h-screen gap-8 px-8 py-12 overflow-y-auto"
           >
-            {/* Header of Mobile Menu */}
-            <div className="flex justify-between items-center mb-16">
-              <span className="font-serif tracking-widest text-sm text-white/70">
-                MENU
-              </span>
-              <button 
+            <div className="flex justify-between items-center w-full mb-4">
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-xs font-serif tracking-[0.25em] text-white uppercase hover:opacity-80 transition">
+                Glow <span className="italic font-light opacity-60">by</span> Thing
+              </Link>
+              <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Close menu"
               >
-                <X className="w-8 h-8" />
+                <X className="w-5 h-5" />
               </button>
             </div>
             
             {/* Menu Links */}
-            <nav className="flex flex-col items-center justify-center flex-1 space-y-10">
+            <nav className="flex-1 flex flex-col items-center justify-center space-y-8 text-center">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-4xl font-serif transition-all hover:scale-105 duration-300 relative group ${
+                  className={`text-4xl font-serif tracking-wider transition-all hover:scale-105 duration-300 relative group ${
                     pathname.startsWith(link.path) ? "text-white" : "text-white/70 hover:text-white"
                   }`}
                 >
@@ -152,12 +152,7 @@ export default function Header() {
               ))}
             </nav>
             
-            {/* Footer of Mobile Menu */}
-            <div className="mt-auto pt-10 text-center">
-              <span className="text-xs font-serif tracking-[0.25em] text-white/50 uppercase">
-                Glow <span className="italic font-light">by</span> Thing
-              </span>
-            </div>
+
           </motion.div>
         )}
       </AnimatePresence>

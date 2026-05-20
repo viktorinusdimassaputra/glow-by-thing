@@ -4,6 +4,7 @@ import Reveal from "@/components/animations/Reveal";
 import { products } from "@/lib/data";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { ArrowRight } from "lucide-react";
 
 export default function Shop() {
   const { addToCart } = useCart();
@@ -48,6 +49,16 @@ export default function Shop() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={0.2} className="mt-24 mb-8 text-center flex justify-center">
+          <Link
+            href="/diet"
+            className="w-full sm:w-auto group relative px-10 py-4 overflow-hidden rounded-full transition-all duration-500 text-center bg-[var(--color-gold)] text-black flex items-center justify-center space-x-3 hover:opacity-90"
+          >
+            <span className="relative z-10 text-[10px] uppercase tracking-[0.2em] font-bold">The Glow Diet</span>
+            <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </Reveal>
       </div>
     </main>
   );

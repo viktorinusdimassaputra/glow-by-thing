@@ -223,10 +223,10 @@ export default function Home() {
                 </Link>
                 <Link
                   href="/skinlab"
-                  className="w-full sm:w-auto group flex items-center justify-center space-x-3 text-[10px] uppercase tracking-[0.2em] font-bold text-white hover:opacity-60 transition py-4 px-4"
+                  className="w-full sm:w-auto group relative px-10 py-4 overflow-hidden rounded-full transition-all duration-500 text-center bg-[var(--color-gold)] text-black flex items-center justify-center space-x-3 hover:opacity-90"
                 >
-                  <span>The Skin Lab</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <span className="relative z-10 text-[10px] uppercase tracking-[0.2em] font-bold">The Skin Lab</span>
+                  <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </Reveal>
