@@ -116,15 +116,17 @@ export default function Header() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "-100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-black z-[100] md:hidden flex flex-col items-center h-screen gap-8 px-8 py-12 overflow-y-auto"
+            className="fixed inset-0 w-full bg-black z-[100] md:hidden flex flex-col items-center min-h-screen gap-8 px-6 py-10 overflow-y-auto"
           >
-            <div className="flex justify-between items-center w-full mb-4">
-              <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-xs font-serif tracking-[0.25em] text-white uppercase hover:opacity-80 transition">
-                Glow <span className="italic font-light opacity-60">by</span> Thing
-              </Link>
+            <div className="relative w-full mb-12">
+              <div className="flex justify-center w-full">
+                <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-xs font-serif tracking-[0.25em] text-white uppercase hover:opacity-80 transition">
+                  Glow <span className="italic font-light opacity-60">by</span> Thing
+                </Link>
+              </div>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+                className="absolute right-0 top-0 p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Close menu"
               >
                 <X className="w-5 h-5" />
@@ -132,13 +134,13 @@ export default function Header() {
             </div>
             
             {/* Menu Links */}
-            <nav className="flex-1 flex flex-col items-center justify-center space-y-8 text-center">
+            <nav className="flex-1 flex flex-col items-center justify-start space-y-10 text-center w-full max-w-full">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-4xl font-serif tracking-wider transition-all hover:scale-105 duration-300 relative group ${
+                  className={`w-full text-4xl font-serif tracking-wider transition-all hover:scale-105 duration-300 relative group ${
                     pathname.startsWith(link.path) ? "text-white" : "text-white/70 hover:text-white"
                   }`}
                 >
