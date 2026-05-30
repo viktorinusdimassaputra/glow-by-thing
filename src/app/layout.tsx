@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CartProvider>
           <BackgroundGlow />
           <Header />
-          <main className="min-h-screen">
+          <main className="min-h-screen w-full max-w-full overflow-hidden">
             {children}
           </main>
           <Footer />

@@ -104,7 +104,7 @@ const productCluster = [
     id: "dewy-glow-barrier-cream",
     name: "Dewy Glow Barrier Cream",
     image: "/glow_coll_cream.png",
-    position: "left-[-2%] md:left-[1%] top-[45%] md:top-[38%]",
+    position: "left-0 md:left-[1%] top-[45%] md:top-[38%]",
     rotate: -12,
     size: "w-32 sm:w-44 md:w-52 lg:w-60",
     delay: 0.5
@@ -113,7 +113,7 @@ const productCluster = [
     id: "glow-shield-spf",
     name: "Glow Shield SPF 50 PA++++",
     image: "/glow_sunscreen.png",
-    position: "right-[-2%] md:right-[1%] top-[48%] md:top-[42%]",
+    position: "right-0 md:right-[1%] top-[48%] md:top-[42%]",
     rotate: 12,
     size: "w-28 sm:w-36 md:w-44 lg:w-52",
     delay: 0.6
@@ -122,9 +122,9 @@ const productCluster = [
 
 export default function Home() {
   return (
-    <main className="relative bg-black">
+    <main className="relative bg-black overflow-x-hidden">
       {/* Radiant Hero Section - Organic Product Cluster Overlap Layout */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 md:py-32">
+      <section className="relative w-full max-w-full min-h-screen flex items-center justify-center overflow-hidden py-24 md:py-32">
         {/* Subtle decorative dark vignette */}
         <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-black/10 pointer-events-none"></div>
         
