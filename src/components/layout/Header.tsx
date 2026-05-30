@@ -35,7 +35,7 @@ export default function Header() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed w-full top-0 z-40 transition-all duration-500 flex items-center ${
-          isScrolled ? "h-16 glass shadow-sm" : "h-24 bg-transparent"
+          isScrolled ? "h-16 bg-[rgba(59,34,16,0.96)] border-b border-white/10 shadow-sm" : "h-24 bg-transparent"
         }`}
       >
         <div className="container mx-auto px-6 grid grid-cols-3 items-center">

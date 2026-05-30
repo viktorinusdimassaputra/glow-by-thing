@@ -27,24 +27,24 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full max-w-md bg-white/5 shadow-2xl z-50 flex flex-col border-l hairline"
+            className="fixed top-0 right-0 h-full w-full max-w-md bg-[rgba(59,34,16,0.96)] shadow-2xl z-50 flex flex-col border-l border-white/10"
           >
             {/* Header */}
-            <div className="flex justify-between items-center p-6 border-b hairline">
-              <h2 className="font-serif text-2xl">Your Bag</h2>
+            <div className="flex justify-between items-center p-6 border-b border-white/10 bg-[rgba(59,34,16,0.95)]">
+              <h2 className="font-serif text-2xl text-[var(--color-gold)]">Your Bag</h2>
               <button
                 onClick={() => setIsCartOpen(false)}
-                className="p-2 hover:bg-black/5 rounded-full transition-colors"
+                className="p-2 hover:bg-[rgba(255,255,255,0.08)] rounded-full transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 text-white" />
               </button>
             </div>
 
             {/* Items */}
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               {cart.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-white/70">
-                  <ShoppingBag className="w-12 h-12 mb-4 opacity-20" />
+                <div className="h-full flex flex-col items-center justify-center text-white/80">
+                  <ShoppingBag className="w-12 h-12 mb-4 opacity-40 text-[var(--color-gold)]" />
                   <p>Your bag is mysteriously empty.</p>
                 </div>
               ) : (
